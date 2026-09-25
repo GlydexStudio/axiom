@@ -94,6 +94,7 @@ export class Axiom {
   }
 
   stream(input: string, options: RunOptions = {}): AsyncIterable<import("./types.js").ModelStreamEvent> {
+    if (!input.trim()) throw new TypeError("AXIOM input cannot be empty.");
     if (!this.model.stream) throw new ModelError(`Model provider "${this.model.provider}" does not implement streaming.`);
     const namespace = options.namespace ?? this.config.namespace ?? defaultMemoryNamespace;
     const conversationId = options.conversationId ?? this.config.conversationId ?? createId();
@@ -129,8 +130,6 @@ export class Axiom {
 function toChatMessage(message: MemoryMessage): ChatMessage {
   return { role: message.role, content: message.content, name: message.name, toolCallId: message.toolCallId };
 }
-
-
 
 let idCounter = 0;
 function createId(): string {
