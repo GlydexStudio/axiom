@@ -1,6 +1,6 @@
 {
   "name": "@glydexstudio/axiom-memory",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Memory abstractions and local in-memory conversation storage for AXIOM.",
   "license": "MIT",
   "type": "module",
