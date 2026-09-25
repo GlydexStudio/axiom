@@ -1,6 +1,6 @@
 {
   "name": "@glydexstudio/axiom-agents",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Permission-aware agent execution primitives for AXIOM.",
   "license": "MIT",
   "type": "module",
@@ -9,6 +9,6 @@
   "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
   "files": ["dist", "README.md", "LICENSE"],
   "repository": { "type": "git", "url": "https://github.com/GlydexStudio/axiom.git", "directory": "packages/agents" },
-  "dependencies": { "@glydexstudio/axiom-core": "0.1.1", "@glydexstudio/axiom-tools": "0.1.1" },
+  "dependencies": { "@glydexstudio/axiom-core": "0.1.2", "@glydexstudio/axiom-tools": "0.1.2" },
   "engines": { "node": ">=22" }
 }
