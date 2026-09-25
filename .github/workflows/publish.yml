@@ -8,32 +8,67 @@ on:
 permissions:
   contents: read
   packages: write
+  id-token: write
 
 jobs:
   publish:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Test and build
+        run: npm run check
+
+      # ---------------------------------------------------------
+      # Publish to npm Registry
+      # Uses npm Trusted Publishing / OIDC
+      # ---------------------------------------------------------
+
+      - name: Publish packages to npm
+        run: |
+          npm publish --workspace packages/memory --registry=https://registry.npmjs.org --access public
+          npm publish --workspace packages/tools --registry=https://registry.npmjs.org --access public
+          npm publish --workspace packages/knowledge --registry=https://registry.npmjs.org --access public
+          npm publish --workspace packages/vision --registry=https://registry.npmjs.org --access public
+          npm publish --workspace packages/voice --registry=https://registry.npmjs.org --access public
+          npm publish --workspace packages/core --registry=https://registry.npmjs.org --access public
+          npm publish --workspace packages/providers --registry=https://registry.npmjs.org --access public
+          npm publish --workspace packages/agents --registry=https://registry.npmjs.org --access public
+
+      # ---------------------------------------------------------
+      # Publish to GitHub Packages
+      # Uses GH_PACKAGES_TOKEN
+      # ---------------------------------------------------------
+
+      - name: Setup GitHub Packages authentication
         uses: actions/setup-node@v4
         with:
           node-version: 24
           registry-url: https://npm.pkg.github.com
           scope: "@glydexstudio"
-      - name: Install dependencies
-        run: npm install
-      - name: Test and build
-        run: npm run check
-      - name: Publish packages
+
+      - name: Publish packages to GitHub Packages
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
         run: |
-          npm publish --workspace packages/memory
-          npm publish --workspace packages/tools
-          npm publish --workspace packages/knowledge
-          npm publish --workspace packages/vision
-          npm publish --workspace packages/voice
-          npm publish --workspace packages/core
-          npm publish --workspace packages/providers
-          npm publish --workspace packages/agents
+          npm publish --workspace packages/memory --registry=https://npm.pkg.github.com
+          npm publish --workspace packages/tools --registry=https://npm.pkg.github.com
+          npm publish --workspace packages/knowledge --registry=https://npm.pkg.github.com
+          npm publish --workspace packages/vision --registry=https://npm.pkg.github.com
+          npm publish --workspace packages/voice --registry=https://npm.pkg.github.com
+          npm publish --workspace packages/core --registry=https://npm.pkg.github.com
+          npm publish --workspace packages/providers --registry=https://npm.pkg.github.com
+          npm publish --workspace packages/agents --registry=https://npm.pkg.github.com
