@@ -8,7 +8,12 @@ export interface MemoryMessage {
   content: string;
   name?: string;
   toolCallId?: string;
-  toolCalls?: Array<{ id: string; name: string; input: unknown }>;
+  toolCalls?: Array<{
+  id: string;
+  name: string;
+  input: unknown;
+  providerData?: Record<string, unknown>;
+}>;
   metadata: Record<string, unknown>;
   createdAt: number;
 }
