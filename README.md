@@ -4,10 +4,10 @@ AXIOM
 
 Open-source, modular, provider-agnostic AI orchestration for developers who want control over the intelligence layer inside their own applications.
 
-""npm" (https://img.shields.io/npm/v/@glydexstudio/axiom-core?label=npm)" (https://www.npmjs.com/package/@glydexstudio/axiom-core)
-""GitHub Release" (https://img.shields.io/github/v/release/GlydexStudio/axiom)" (https://github.com/GlydexStudio/axiom/releases)
-""License" (https://img.shields.io/badge/license-MIT-green)" (LICENSE)
-""Node" (https://img.shields.io/badge/node-%3E%3D22-339933)" (https://nodejs.org/)
+[![npm](https://img.shields.io/npm/v/@glydexstudio/axiom-core?label=npm)](https://www.npmjs.com/package/@glydexstudio/axiom-core)
+[![GitHub Release](https://img.shields.io/github/v/release/GlydexStudio/axiom)](https://github.com/GlydexStudio/axiom/releases)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![Node](https://img.shields.io/badge/node-%3E%3D22-339933)](https://nodejs.org/)
 
 </div>---
 
@@ -17,41 +17,27 @@ AXIOM is a modular TypeScript framework for building AI-powered applications wit
 
 Instead of being another model SDK, AXIOM provides the intelligence layer around your application:
 
-- model abstraction
-- conversation orchestration
-- memory
-- tools
-- permissions
-- agents
-- knowledge retrieval
-- events
-- plugins
-- vision and voice capability contracts
-- provider routing
+- Model abstraction
+- Conversation orchestration
+- Memory
+- Tools
+- Permissions
+- Agents
+- Knowledge retrieval
+- Events
+- Plugins
+- Vision and voice capability contracts
+- Provider routing
 
-Your application controls the infrastructure.
+«Your application controls the infrastructure.
 
-AXIOM controls the orchestration.
-
-┌──────────────────────────────────────────┐
-│              Your Application             │
-├──────────────────────────────────────────┤
-│                  AXIOM                    │
-│                                          │
-│  Core ─ Memory ─ Tools ─ Agents          │
-│         │        │        │               │
-│  Providers ─ Knowledge ─ Plugins          │
-│         │                                  │
-│  Vision / Voice capability contracts      │
-├──────────────────────────────────────────┤
-│       Local / Remote AI Infrastructure    │
-└──────────────────────────────────────────┘
+AXIOM controls the orchestration.»
 
 ---
 
 Why AXIOM?
 
-AXIOM is designed around a few principles:
+AXIOM is designed around a few core principles:
 
 - Open source
 - Provider agnostic
@@ -70,7 +56,7 @@ You can connect a local model, an OpenAI-compatible server, Ollama, or your own 
 
 ---
 
-Current release
+Current Release
 
 AXIOM "0.1.2"
 
@@ -88,21 +74,21 @@ Package| Purpose
 "@glydexstudio/axiom-vision"| Provider-neutral vision contracts
 "@glydexstudio/axiom-voice"| Provider-neutral voice contracts
 
-Current status
+Current Status
 
 The following are intentionally not claimed as complete production implementations yet:
 
-- durable database-backed memory
-- production vector database adapters
-- advanced RAG pipelines
-- reranking
-- native embedding providers
-- broad commercial provider coverage
-- native local model runtimes
-- production vision inference providers
-- production voice inference providers
-- advanced model routing policies
-- distributed agent execution
+- Durable database-backed memory
+- Production vector database adapters
+- Advanced RAG pipelines
+- Reranking
+- Native embedding providers
+- Broad commercial provider coverage
+- Native local model runtimes
+- Production vision inference providers
+- Production voice inference providers
+- Advanced model routing policies
+- Distributed agent execution
 
 ---
 
@@ -121,7 +107,7 @@ AXIOM is distributed as independent npm packages.
 
 Install only what your application needs.
 
-For most applications, start with:
+For most applications:
 
 npm install @glydexstudio/axiom-core @glydexstudio/axiom-providers
 
@@ -134,7 +120,7 @@ Requirements
 - npm "10+" recommended
 - TypeScript "5.8+" recommended
 
-AXIOM itself does not require an OpenAI, Anthropic, Google or other commercial API key.
+AXIOM itself does not require an OpenAI, Anthropic, Google, or other commercial API key.
 
 Actual inference depends on the model provider you connect.
 
@@ -146,7 +132,7 @@ Quick Start
 
 npm install @glydexstudio/axiom-core @glydexstudio/axiom-providers
 
-2. Connect a model
+2. Connect a Model
 
 For example, using Ollama:
 
@@ -184,7 +170,7 @@ const model = new OpenAICompatibleProvider({
   model: "your-local-model"
 });
 
-An API key can be supplied when the server requires authentication.
+An API key can be supplied when the server requires authentication:
 
 const model = new OpenAICompatibleProvider({
   baseUrl: "https://your-server.example/v1",
@@ -211,7 +197,6 @@ class MyModel implements ChatModel {
   readonly model = "my-model";
 
   async generate(request: ModelRequest): Promise<ModelResponse> {
-    // Your model implementation
     return {
       message: {
         role: "assistant",
@@ -222,8 +207,6 @@ class MyModel implements ChatModel {
     };
   }
 }
-
-Then:
 
 const axiom = new Axiom({
   model: new MyModel()
@@ -271,11 +254,11 @@ AXIOM intentionally does not silently send application memory to a remote servic
 Future memory adapters can target:
 
 - SQLite
-- files
-- embedded databases
+- Files
+- Embedded databases
 - SQL databases
-- remote databases
-- encrypted storage
+- Remote databases
+- Encrypted storage
 
 ---
 
@@ -336,7 +319,7 @@ toolPermissions: new Set([
   "network"
 ])
 
-A model does not automatically receive filesystem, process, network or write access.
+A model does not automatically receive filesystem, process, network, or write access.
 
 Capabilities must be exposed by the application through tools.
 
@@ -387,13 +370,13 @@ Knowledge
 
 "@glydexstudio/axiom-knowledge" provides the foundation for retrieval systems.
 
-Current capabilities include:
+Current capabilities
 
-- local document storage
-- lexical search
-- embedding interfaces
-- vector-store interfaces
-- in-memory cosine similarity
+- Local document storage
+- Lexical search
+- Embedding interfaces
+- Vector-store interfaces
+- In-memory cosine similarity
 
 Example:
 
@@ -430,18 +413,16 @@ const unsubscribe = axiom.on(
   }
 );
 
-Remove the listener when it is no longer required:
-
 unsubscribe();
 
 Events are useful for:
 
-- logging
+- Logging
 - UI updates
-- debugging
-- telemetry
-- application integrations
-- plugin systems
+- Debugging
+- Telemetry
+- Application integrations
+- Plugin systems
 
 ---
 
@@ -468,16 +449,16 @@ Plugins receive a controlled context rather than unrestricted access to the runt
 
 Vision and Voice
 
-The vision and voice packages currently expose provider-neutral contracts.
+The vision and voice packages currently expose provider-neutral contracts:
 
-@glydexstudio/axiom-vision
-@glydexstudio/axiom-voice
+- "@glydexstudio/axiom-vision"
+- "@glydexstudio/axiom-voice"
 
 These packages are intentionally interfaces/contracts at this stage.
 
 They do not pretend to provide local vision or speech inference when an actual provider implementation is not present.
 
-This allows application developers to build against stable capability abstractions before selecting a specific runtime.
+This allows application developers to build against capability abstractions before selecting a specific runtime.
 
 ---
 
@@ -487,7 +468,7 @@ Architecture
                                 │
                                 ▼
                     ┌─────────────────────┐
-                    │   AXIOM Core        │
+                    │     AXIOM Core      │
                     │                     │
                     │ Runtime             │
                     │ Models              │
@@ -567,7 +548,7 @@ Run tests only:
 
 npm test
 
-More information:
+Documentation
 
 - "Developer Guide" (docs/GETTING_STARTED.md)
 - "Development Guide" (docs/DEVELOPMENT.md)
@@ -585,20 +566,20 @@ AXIOM maintains automated coverage for the implemented runtime.
 
 The verification suite covers:
 
-- core runtime initialization
-- model abstraction
-- tool registration
-- tool validation
-- permissions
-- memory
-- provider behavior
-- provider errors
-- knowledge retrieval
-- vector similarity
-- streaming
-- agent limits
-- configuration
-- edge cases
+- Core runtime initialization
+- Model abstraction
+- Tool registration
+- Tool validation
+- Permissions
+- Memory
+- Provider behavior
+- Provider errors
+- Knowledge retrieval
+- Vector similarity
+- Streaming
+- Agent limits
+- Configuration
+- Edge cases
 
 Run:
 
@@ -606,11 +587,11 @@ npm run check
 
 The "0.1.2" release was validated with:
 
-12/12 official tests passing
-Behavior tests passing
-Integration tests passing
-Edge + streaming tests passing
-TypeScript build passing
+- 12/12 official tests passing
+- Behavior tests passing
+- Integration tests passing
+- Edge and streaming tests passing
+- TypeScript build passing
 
 ---
 
@@ -646,37 +627,37 @@ Roadmap
 
 0.1.x
 
-- stabilize core contracts
-- expand test coverage
-- improve provider support
-- improve memory abstractions
-- expand plugin hooks
-- improve developer documentation
+- Stabilize core contracts
+- Expand test coverage
+- Improve provider support
+- Improve memory abstractions
+- Expand plugin hooks
+- Improve developer documentation
 
 0.2.x
 
-- embedding adapters
-- persistent vector stores
-- retrieval pipelines
-- citations
-- more local runtime integrations
+- Embedding adapters
+- Persistent vector stores
+- Retrieval pipelines
+- Citations
+- More local runtime integrations
 
 0.3.x
 
-- richer agent planning
-- routing policies
-- observability
-- vision implementations
-- voice implementations
+- Richer agent planning
+- Routing policies
+- Observability
+- Vision implementations
+- Voice implementations
 
 1.0.0
 
-- stable public API
-- compatibility policy
-- documented extension contracts
-- production-grade selected adapters
+- Stable public API
+- Compatibility policy
+- Documented extension contracts
+- Production-grade selected adapters
 
-The roadmap is directional and does not represent features that are already implemented.
+«The roadmap is directional and does not represent features that are already implemented.»
 
 ---
 
@@ -686,13 +667,13 @@ AI tools can expose powerful application capabilities.
 
 Applications should:
 
-- grant the minimum required permissions
-- validate tool inputs
-- avoid exposing unnecessary filesystem/process capabilities
-- protect provider credentials
-- review plugins before installation
-- define appropriate memory retention policies
-- keep dependencies updated
+- Grant the minimum required permissions
+- Validate tool inputs
+- Avoid exposing unnecessary filesystem/process capabilities
+- Protect provider credentials
+- Review plugins before installation
+- Define appropriate memory retention policies
+- Keep dependencies updated
 
 For security reports, see "SECURITY.md" (SECURITY.md).
 
@@ -704,16 +685,16 @@ Contributions are welcome.
 
 You can contribute:
 
-- code
-- tests
-- documentation
-- provider adapters
-- memory adapters
-- knowledge integrations
-- plugins
-- examples
-- bug reports
-- feature proposals
+- Code
+- Tests
+- Documentation
+- Provider adapters
+- Memory adapters
+- Knowledge integrations
+- Plugins
+- Examples
+- Bug reports
+- Feature proposals
 
 Read "CONTRIBUTING.md" (CONTRIBUTING.md) before submitting a contribution.
 
