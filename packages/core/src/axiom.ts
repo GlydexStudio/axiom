@@ -121,10 +121,35 @@ export class Axiom {
     return this.memory ? this.memory.list({ namespace, conversationId }) : [];
   }
 
-  private async persistMessage(namespace: string, conversationId: string, message: Pick<ChatMessage, "role" | "content" | "name" | "toolCallId" | "toolCalls">, metadata: Readonly<Record<string, unknown>>, toolCalls?: Array<{ id: string; name: string; input: unknown }>): Promise<void> {
-    if (!this.memory) return;
-    await this.memory.add({ id: createId(), namespace, conversationId, role: message.role, content: message.content, name: message.name, toolCallId: message.toolCallId, toolCalls, metadata: { ...metadata }, createdAt: Date.now() });
-  }
+  private async persistMessage(
+  namespace: string,
+  conversationId: string,
+  message: Pick<
+    ChatMessage,
+    "role" | "content" | "name" | "toolCallId" | "toolCalls"
+  >,
+  metadata: Readonly<Record<string, unknown>>,
+  toolCalls?: Array<{
+    id: string;
+    name: string;
+    input: unknown;
+    providerData?: Record<string, unknown>;
+  }>
+): Promise<void> {
+  if (!this.memory) return;
+
+  await this.memory.add({
+    id: createId(),
+    namespace,
+    conversationId,
+    role: message.role,
+    content: message.content,
+    name: message.name,
+    toolCallId: message.toolCallId,
+    toolCalls,
+    metadata: { ...metadata },
+    createdAt: Date.now()
+  });
 }
 
 function toChatMessage(message: MemoryMessage): ChatMessage {
