@@ -44,10 +44,10 @@ jobs:
             PACKAGE="$1"
             WORKSPACE="$2"
 
-            if npm view "$PACKAGE@0.1.1" version --registry=https://registry.npmjs.org >/dev/null 2>&1; then
-              echo "Skipping $PACKAGE@0.1.1 — already published on npm"
+            if npm view "$PACKAGE@0.1.2" version --registry=https://registry.npmjs.org >/dev/null 2>&1; then
+              echo "Skipping $PACKAGE@0.1.2 — already published on npm"
             else
-              echo "Publishing $PACKAGE@0.1.1 to npm..."
+              echo "Publishing $PACKAGE@0.1.2 to npm..."
               npm publish \
                 --workspace "$WORKSPACE" \
                 --registry=https://registry.npmjs.org \
@@ -85,10 +85,10 @@ jobs:
             PACKAGE="$1"
             WORKSPACE="$2"
 
-            if npm view "$PACKAGE@0.1.1" version --registry=https://npm.pkg.github.com >/dev/null 2>&1; then
-              echo "Skipping $PACKAGE@0.1.1 — already published on GitHub Packages"
+            if npm view "$PACKAGE@0.1.2" version --registry=https://npm.pkg.github.com >/dev/null 2>&1; then
+              echo "Skipping $PACKAGE@0.1.2 — already published on GitHub Packages"
             else
-              echo "Publishing $PACKAGE@0.1.1 to GitHub Packages..."
+              echo "Publishing $PACKAGE@0.1.2 to GitHub Packages..."
               npm publish \
                 --workspace "$WORKSPACE" \
                 --registry=https://npm.pkg.github.com
