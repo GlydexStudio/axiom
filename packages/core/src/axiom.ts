@@ -128,7 +128,13 @@ export class Axiom {
 }
 
 function toChatMessage(message: MemoryMessage): ChatMessage {
-  return { role: message.role, content: message.content, name: message.name, toolCallId: message.toolCallId };
+  return {
+    role: message.role,
+    content: message.content,
+    name: message.name,
+    toolCallId: message.toolCallId,
+    toolCalls: message.toolCalls
+  };
 }
 
 let idCounter = 0;
