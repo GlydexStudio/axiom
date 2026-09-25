@@ -8,6 +8,7 @@ Open-source, modular, provider-agnostic AI orchestration for developers who want
 [![GitHub Release](https://img.shields.io/github/v/release/GlydexStudio/axiom)](https://github.com/GlydexStudio/axiom/releases)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D22-339933)](https://nodejs.org/)
+[![Sponsor Glydex Studio](https://img.shields.io/badge/Sponsor-Glydex%20Studio-ea4aaa?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/GlydexStudio)
 
 </div>---
 
