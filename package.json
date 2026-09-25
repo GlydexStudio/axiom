@@ -1,0 +1,22 @@
+{
+  "name": "axiom",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AXIOM — The intelligence layer for any application.",
+  "license": "MIT",
+  "author": "Glydex Studio",
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "build": "tsc -b tsconfig.json",
+    "clean": "tsc -b tsconfig.json --clean",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "check": "npm run build && npm test",
+    "pack": "npm pack --workspaces --include-workspace-root=false",
+    "format:check": "node scripts/check-format.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}

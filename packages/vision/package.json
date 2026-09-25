@@ -1,0 +1,14 @@
+{
+  "name": "@glydexstudio/axiom-vision",
+  "version": "0.1.0",
+  "description": "Provider-neutral vision capability contracts for AXIOM.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "files": ["dist", "README.md", "LICENSE"],
+  "repository": { "type": "git", "url": "https://github.com/GlydexStudio/axiom.git", "directory": "packages/vision" },
+  "publishConfig": { "registry": "https://npm.pkg.github.com" },
+  "engines": { "node": ">=22" }
+}

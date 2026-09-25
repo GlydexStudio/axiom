@@ -1,0 +1,39 @@
+name: Publish AXIOM packages
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://npm.pkg.github.com
+          scope: "@glydexstudio"
+      - name: Install dependencies
+        run: npm install
+      - name: Test and build
+        run: npm run check
+      - name: Publish packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npm publish --workspace packages/memory
+          npm publish --workspace packages/tools
+          npm publish --workspace packages/knowledge
+          npm publish --workspace packages/vision
+          npm publish --workspace packages/voice
+          npm publish --workspace packages/core
+          npm publish --workspace packages/providers
+          npm publish --workspace packages/agents

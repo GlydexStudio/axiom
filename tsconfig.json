@@ -1,0 +1,13 @@
+{
+  "files": [],
+  "references": [
+    { "path": "packages/memory" },
+    { "path": "packages/tools" },
+    { "path": "packages/knowledge" },
+    { "path": "packages/vision" },
+    { "path": "packages/voice" },
+    { "path": "packages/core" },
+    { "path": "packages/providers" },
+    { "path": "packages/agents" }
+  ]
+}

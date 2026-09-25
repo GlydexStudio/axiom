@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "composite": true,
+    "outDir": "dist",
+    "rootDir": "src",
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@glydexstudio/axiom-core": ["packages/core/src/index.ts"],
+      "@glydexstudio/axiom-memory": ["packages/memory/src/index.ts"],
+      "@glydexstudio/axiom-tools": ["packages/tools/src/index.ts"],
+      "@glydexstudio/axiom-providers": ["packages/providers/src/index.ts"],
+      "@glydexstudio/axiom-knowledge": ["packages/knowledge/src/index.ts"],
+      "@glydexstudio/axiom-vision": ["packages/vision/src/index.ts"],
+      "@glydexstudio/axiom-voice": ["packages/voice/src/index.ts"],
+      "@glydexstudio/axiom-agents": ["packages/agents/src/index.ts"]
+    }
+  }
+}
