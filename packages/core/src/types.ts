@@ -21,6 +21,7 @@ export interface ModelToolCall {
   id: string;
   name: string;
   input: unknown;
+  providerData?: Record<string, unknown>;
 }
 
 export interface ModelRequest {
