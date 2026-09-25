@@ -1,6 +1,6 @@
 {
   "name": "@glydexstudio/axiom-core",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Core orchestration engine for AXIOM.",
   "license": "MIT",
   "type": "module",
@@ -10,8 +10,8 @@
   "files": ["dist", "README.md", "LICENSE"],
   "repository": { "type": "git", "url": "https://github.com/GlydexStudio/axiom.git", "directory": "packages/core" },
   "dependencies": {
-    "@glydexstudio/axiom-memory": "0.1.2",
-    "@glydexstudio/axiom-tools": "0.1.2"
+    "@glydexstudio/axiom-memory": "0.1.3",
+    "@glydexstudio/axiom-tools": "0.1.3"
   },
   "engines": { "node": ">=22" }
 }
