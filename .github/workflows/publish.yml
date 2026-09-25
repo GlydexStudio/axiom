@@ -33,25 +33,41 @@ jobs:
       # ---------------------------------------------------------
       # Publish to npm Registry
       # Bootstrap authentication using NPM_TOKEN.
-      # This will later be replaced by npm Trusted Publishing.
+      # Already published versions are skipped.
       # ---------------------------------------------------------
 
       - name: Publish packages to npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          npm publish --workspace packages/memory --registry=https://registry.npmjs.org --access public
-          npm publish --workspace packages/tools --registry=https://registry.npmjs.org --access public
-          npm publish --workspace packages/knowledge --registry=https://registry.npmjs.org --access public
-          npm publish --workspace packages/vision --registry=https://registry.npmjs.org --access public
-          npm publish --workspace packages/voice --registry=https://registry.npmjs.org --access public
-          npm publish --workspace packages/core --registry=https://registry.npmjs.org --access public
-          npm publish --workspace packages/providers --registry=https://registry.npmjs.org --access public
-          npm publish --workspace packages/agents --registry=https://registry.npmjs.org --access public
+          publish_if_missing() {
+            PACKAGE="$1"
+            WORKSPACE="$2"
+
+            if npm view "$PACKAGE@0.1.1" version --registry=https://registry.npmjs.org >/dev/null 2>&1; then
+              echo "Skipping $PACKAGE@0.1.1 — already published on npm"
+            else
+              echo "Publishing $PACKAGE@0.1.1 to npm..."
+              npm publish \
+                --workspace "$WORKSPACE" \
+                --registry=https://registry.npmjs.org \
+                --access public
+            fi
+          }
+
+          publish_if_missing "@glydexstudio/axiom-memory" "packages/memory"
+          publish_if_missing "@glydexstudio/axiom-tools" "packages/tools"
+          publish_if_missing "@glydexstudio/axiom-knowledge" "packages/knowledge"
+          publish_if_missing "@glydexstudio/axiom-vision" "packages/vision"
+          publish_if_missing "@glydexstudio/axiom-voice" "packages/voice"
+          publish_if_missing "@glydexstudio/axiom-core" "packages/core"
+          publish_if_missing "@glydexstudio/axiom-providers" "packages/providers"
+          publish_if_missing "@glydexstudio/axiom-agents" "packages/agents"
 
       # ---------------------------------------------------------
       # Publish to GitHub Packages
-      # Uses GH_PACKAGES_TOKEN
+      # Uses GH_PACKAGES_TOKEN.
+      # Already published versions are skipped.
       # ---------------------------------------------------------
 
       - name: Setup GitHub Packages authentication
@@ -65,11 +81,25 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
         run: |
-          npm publish --workspace packages/memory --registry=https://npm.pkg.github.com
-          npm publish --workspace packages/tools --registry=https://npm.pkg.github.com
-          npm publish --workspace packages/knowledge --registry=https://npm.pkg.github.com
-          npm publish --workspace packages/vision --registry=https://npm.pkg.github.com
-          npm publish --workspace packages/voice --registry=https://npm.pkg.github.com
-          npm publish --workspace packages/core --registry=https://npm.pkg.github.com
-          npm publish --workspace packages/providers --registry=https://npm.pkg.github.com
-          npm publish --workspace packages/agents --registry=https://npm.pkg.github.com
+          publish_if_missing() {
+            PACKAGE="$1"
+            WORKSPACE="$2"
+
+            if npm view "$PACKAGE@0.1.1" version --registry=https://npm.pkg.github.com >/dev/null 2>&1; then
+              echo "Skipping $PACKAGE@0.1.1 — already published on GitHub Packages"
+            else
+              echo "Publishing $PACKAGE@0.1.1 to GitHub Packages..."
+              npm publish \
+                --workspace "$WORKSPACE" \
+                --registry=https://npm.pkg.github.com
+            fi
+          }
+
+          publish_if_missing "@glydexstudio/axiom-memory" "packages/memory"
+          publish_if_missing "@glydexstudio/axiom-tools" "packages/tools"
+          publish_if_missing "@glydexstudio/axiom-knowledge" "packages/knowledge"
+          publish_if_missing "@glydexstudio/axiom-vision" "packages/vision"
+          publish_if_missing "@glydexstudio/axiom-voice" "packages/voice"
+          publish_if_missing "@glydexstudio/axiom-core" "packages/core"
+          publish_if_missing "@glydexstudio/axiom-providers" "packages/providers"
+          publish_if_missing "@glydexstudio/axiom-agents" "packages/agents"
