@@ -160,6 +160,7 @@ function toChatMessage(message: MemoryMessage): ChatMessage {
     toolCallId: message.toolCallId,
     toolCalls: message.toolCalls
   };
+ }
 }
 
 let idCounter = 0;
