@@ -1,67 +1,115 @@
-# AXIOM
+AXIOM
 
-<div align="center">
+<div align="center">The intelligence layer for any application.
 
-**AXIOM — The intelligence layer for any application.**
+Open-source, modular, provider-agnostic AI orchestration for developers who want control over the intelligence layer inside their own applications.
 
-Open-source, modular, provider-agnostic AI orchestration for developers who want control over the intelligence layer inside their own products.
+""npm" (https://img.shields.io/npm/v/@glydexstudio/axiom-core?label=npm)" (https://www.npmjs.com/package/@glydexstudio/axiom-core)
+""GitHub Release" (https://img.shields.io/github/v/release/GlydexStudio/axiom)" (https://github.com/GlydexStudio/axiom/releases)
+""License" (https://img.shields.io/badge/license-MIT-green)" (LICENSE)
+""Node" (https://img.shields.io/badge/node-%3E%3D22-339933)" (https://nodejs.org/)
 
-</div>
+</div>---
 
-## What is AXIOM?
+What is AXIOM?
 
-AXIOM is a TypeScript framework for composing AI capabilities into applications without making a commercial AI provider a hard dependency.
+AXIOM is a modular TypeScript framework for building AI-powered applications without coupling your application to a single AI vendor, model provider, memory backend, or execution environment.
 
-AXIOM is intentionally built around interfaces and orchestration rather than a single API wrapper. The runtime can combine a model, memory, tools, events, plugins and bounded agent execution while leaving model hosting and data persistence under the application's control.
+Instead of being another model SDK, AXIOM provides the intelligence layer around your application:
 
-### Core principles
+- model abstraction
+- conversation orchestration
+- memory
+- tools
+- permissions
+- agents
+- knowledge retrieval
+- events
+- plugins
+- vision and voice capability contracts
+- provider routing
 
-- Open source and free to use
-- Local-first by default
-- Provider-agnostic model interface
-- Modular packages
-- Explicit tool permissions
-- Privacy-conscious memory
-- No mandatory commercial API key
-- Production-oriented TypeScript
-- Portable across Linux, Windows and macOS, with Node-compatible Android/Termux environments supported where the underlying Node ecosystem permits it
+Your application controls the infrastructure.
 
-## Current implementation status
+AXIOM controls the orchestration.
 
-### Implemented in 0.1.0
+┌──────────────────────────────────────────┐
+│              Your Application             │
+├──────────────────────────────────────────┤
+│                  AXIOM                    │
+│                                          │
+│  Core ─ Memory ─ Tools ─ Agents          │
+│         │        │        │               │
+│  Providers ─ Knowledge ─ Plugins          │
+│         │                                  │
+│  Vision / Voice capability contracts      │
+├──────────────────────────────────────────┤
+│       Local / Remote AI Infrastructure    │
+└──────────────────────────────────────────┘
 
-- `@glydexstudio/axiom-core` — runtime orchestration, conversation history, model interface, bounded tool loop, events and plugins
-- `@glydexstudio/axiom-memory` — in-memory conversation and key-value memory with namespaces/scopes
-- `@glydexstudio/axiom-tools` — typed tool registry, JSON-schema subset validation and explicit permissions
-- `@glydexstudio/axiom-providers` — Ollama adapter, OpenAI-compatible adapter and fallback router
-- `@glydexstudio/axiom-agents` — bounded agent execution foundation using model tool calls
-- `@glydexstudio/axiom-knowledge` — local lexical retrieval and vector-store abstraction with in-memory cosine similarity
-- `@glydexstudio/axiom-vision` — provider-neutral vision contracts
-- `@glydexstudio/axiom-voice` — provider-neutral speech contracts
-- GitHub Actions CI and package publishing workflow
-- Automated tests for the implemented runtime pieces
+---
 
-### Planned
+Why AXIOM?
 
-The following are deliberately not presented as finished features:
+AXIOM is designed around a few principles:
 
-- Durable database-backed memory adapters
-- Native embedding provider implementations
-- Production vector database adapters
-- Advanced RAG pipelines, chunking and reranking
-- More first-party commercial provider adapters
-- Native embedded local model runtimes for supported platforms
-- Vision and voice provider implementations
-- Advanced routing policies based on latency, cost or model capability
-- Broader observability integrations
+- Open source
+- Provider agnostic
+- Local-first
+- Modular
+- Explicit permissions
+- Replaceable infrastructure
+- No mandatory commercial AI API
+- TypeScript-first
+- Application-controlled memory
+- Bounded agent execution
 
-## Package namespace
+AXIOM does not require your application to use a specific commercial AI provider.
 
-AXIOM uses the GitHub owner namespace `@glydexstudio/axiom-*` in this repository rather than claiming that the `@axiom/*` scope is available for publishing. GitHub Packages requires scoped npm packages, and scopes are tied to the GitHub user or organization that hosts the package.
+You can connect a local model, an OpenAI-compatible server, Ollama, or your own "ChatModel" implementation.
 
-The package names are therefore:
+---
 
-```text
+Current release
+
+AXIOM "0.1.2"
+
+The "0.1.x" series is an actively evolving foundation. Public APIs may continue to evolve before the "1.0.0" stability milestone.
+
+Implemented
+
+Package| Purpose
+"@glydexstudio/axiom-core"| Runtime orchestration, models, memory integration, tools, events and plugins
+"@glydexstudio/axiom-memory"| Memory contracts and in-memory storage
+"@glydexstudio/axiom-tools"| Tool registry, validation and permissions
+"@glydexstudio/axiom-agents"| Bounded agent execution
+"@glydexstudio/axiom-providers"| Ollama, OpenAI-compatible providers and fallback routing
+"@glydexstudio/axiom-knowledge"| Local retrieval and vector-store abstractions
+"@glydexstudio/axiom-vision"| Provider-neutral vision contracts
+"@glydexstudio/axiom-voice"| Provider-neutral voice contracts
+
+Current status
+
+The following are intentionally not claimed as complete production implementations yet:
+
+- durable database-backed memory
+- production vector database adapters
+- advanced RAG pipelines
+- reranking
+- native embedding providers
+- broad commercial provider coverage
+- native local model runtimes
+- production vision inference providers
+- production voice inference providers
+- advanced model routing policies
+- distributed agent execution
+
+---
+
+Packages
+
+AXIOM is distributed as independent npm packages.
+
 @glydexstudio/axiom-core
 @glydexstudio/axiom-memory
 @glydexstudio/axiom-tools
@@ -70,183 +118,173 @@ The package names are therefore:
 @glydexstudio/axiom-knowledge
 @glydexstudio/axiom-vision
 @glydexstudio/axiom-voice
-```
 
-If the project is later moved to a different GitHub owner, rename the package scopes consistently before publishing that fork.
+Install only what your application needs.
 
-## Architecture
+For most applications, start with:
 
-```text
-Application
-    │
-    ▼
-@glydexstudio/axiom-core
-    ├── Model abstraction ────────────────► local / remote model runtime
-    ├── Conversation orchestration
-    ├── Memory integration ───────────────► @glydexstudio/axiom-memory
-    ├── Tool orchestration ───────────────► @glydexstudio/axiom-tools
-    ├── Events / hooks
-    └── Plugin lifecycle
-
-@glydexstudio/axiom-agents
-    ├── goal
-    ├── model planning / tool calls
-    ├── explicit permissions
-    ├── bounded execution
-    └── observations → next step
-
-@glydexstudio/axiom-knowledge
-    ├── document retrieval
-    ├── embedding abstraction
-    └── vector store abstraction
-
-@glydexstudio/axiom-vision / @glydexstudio/axiom-voice
-    └── capability contracts for future provider implementations
-```
-
-The framework avoids a hard dependency on a vendor SDK in the core package.
-
-## Requirements
-
-- Node.js 22 or newer; Node.js 24 LTS is recommended for the 0.1.x development line.
-- npm 10+ / npm 11+ is recommended.
-- A TypeScript-capable development environment.
-- A local model server or another implementation of `ChatModel` for actual model inference.
-
-AXIOM itself does not need an OpenAI, Anthropic or Google API key.
-
-## Installation
-
-### From a local clone
-
-```bash
-git clone https://github.com/GlydexStudio/axiom.git
-cd axiom
-npm install
-npm run check
-```
-
-### Using published GitHub Packages
-
-After the packages have been published by the repository maintainer, configure npm for the `@glydexstudio` scope and install only the packages your application needs.
-
-```bash
 npm install @glydexstudio/axiom-core @glydexstudio/axiom-providers
-```
 
-See [Using AXIOM from GitHub Packages](#using-axiom-from-github-packages) for authentication details.
+---
 
-## Quick start
+Requirements
 
-A minimal integration uses the provider abstraction. No vendor SDK is required in your application.
+- Node.js "22+"
+- Node.js "24" recommended
+- npm "10+" recommended
+- TypeScript "5.8+" recommended
 
-```ts
+AXIOM itself does not require an OpenAI, Anthropic, Google or other commercial API key.
+
+Actual inference depends on the model provider you connect.
+
+---
+
+Quick Start
+
+1. Install
+
+npm install @glydexstudio/axiom-core @glydexstudio/axiom-providers
+
+2. Connect a model
+
+For example, using Ollama:
+
 import { Axiom } from "@glydexstudio/axiom-core";
 import { OllamaProvider } from "@glydexstudio/axiom-providers";
 
-const axiom = new Axiom({
-  model: new OllamaProvider({
-    model: process.env.AXIOM_MODEL ?? "llama3.2"
-  })
+const model = new OllamaProvider({
+  model: "llama3.2"
 });
 
-const result = await axiom.run("Explain why local-first AI can be useful.");
+const axiom = new Axiom({
+  model
+});
+
+3. Run AXIOM
+
+const result = await axiom.run(
+  "Explain why local-first AI can be useful."
+);
+
 console.log(result.text);
-```
 
-The example assumes an Ollama server is already running and exposes the configured model. AXIOM does not install, manage or bundle Ollama itself.
+AXIOM does not install or manage Ollama for you. The model runtime remains an external infrastructure component.
 
-## Local model usage
+---
 
-The preferred local-first pattern is to run the model outside AXIOM and connect through an adapter:
+OpenAI-Compatible Models
 
-```ts
+AXIOM also supports OpenAI-compatible HTTP APIs.
+
 import { OpenAICompatibleProvider } from "@glydexstudio/axiom-providers";
 
 const model = new OpenAICompatibleProvider({
   baseUrl: "http://127.0.0.1:1234/v1",
   model: "your-local-model"
 });
-```
 
-An API key is optional. This makes the provider suitable for local OpenAI-compatible servers and future custom runtimes that expose the same request contract.
+An API key can be supplied when the server requires authentication.
 
-For Ollama:
-
-```ts
-import { OllamaProvider } from "@glydexstudio/axiom-providers";
-
-const model = new OllamaProvider({
-  baseUrl: "http://127.0.0.1:11434",
-  model: "your-local-model"
+const model = new OpenAICompatibleProvider({
+  baseUrl: "https://your-server.example/v1",
+  model: "your-model",
+  apiKey: process.env.AXIOM_API_KEY
 });
-```
 
-The Android/Termux story is deliberately HTTP-based: if a Node-compatible environment can reach a compatible model server, the same provider layer can be used without a desktop GUI.
+The provider abstraction keeps provider-specific HTTP details outside the AXIOM core runtime.
 
-## Provider architecture
+---
 
-The provider layer is based on the `ChatModel` contract:
+Custom Models
 
-```ts
-import type { ChatModel } from "@glydexstudio/axiom-core";
-```
+You can implement the "ChatModel" interface yourself.
 
-The interface is intentionally small:
+import type {
+  ChatModel,
+  ModelRequest,
+  ModelResponse
+} from "@glydexstudio/axiom-core";
 
-- provider name
-- model name
-- `generate(request)` for non-streaming inference
-- optional `stream(request)` for streaming inference
+class MyModel implements ChatModel {
+  readonly provider = "my-provider";
+  readonly model = "my-model";
 
-This keeps vendor-specific authentication, HTTP formats and runtime quirks outside the core engine.
+  async generate(request: ModelRequest): Promise<ModelResponse> {
+    // Your model implementation
+    return {
+      message: {
+        role: "assistant",
+        content: "Hello from my model."
+      },
+      toolCalls: [],
+      finishReason: "stop"
+    };
+  }
+}
 
-### Optional providers
+Then:
 
-`@glydexstudio/axiom-providers` currently contains:
+const axiom = new Axiom({
+  model: new MyModel()
+});
 
-- `OllamaProvider`
-- `OpenAICompatibleProvider`
-- `FallbackModelRouter`
+This is one of the central design goals of AXIOM: your application should not need to depend on a vendor SDK just to use the orchestration layer.
 
-Direct first-party adapters for specific commercial vendors are planned, not claimed as implemented.
+---
 
-## Memory
+Memory
 
-Memory is explicit and replaceable. AXIOM does not silently decide to persist arbitrary data in a remote service.
+Memory is explicit and replaceable.
 
-```ts
+import { Axiom } from "@glydexstudio/axiom-core";
 import { InMemoryMemoryStore } from "@glydexstudio/axiom-memory";
 
 const memory = new InMemoryMemoryStore();
+
 const axiom = new Axiom({
   model,
   memory,
   namespace: "my-app"
 });
 
-const conversationId = "user-123-chat-01";
-await axiom.run("Remember that my preferred editor is Acode.", { conversationId });
-const result = await axiom.run("Which editor did I mention?", { conversationId });
-```
+await axiom.run(
+  "My preferred editor is Acode.",
+  {
+    conversationId: "conversation-1"
+  }
+);
 
-The 0.1.0 store is process-local. It provides:
+const result = await axiom.run(
+  "Which editor did I mention?",
+  {
+    conversationId: "conversation-1"
+  }
+);
 
-- conversation messages
-- namespaces
-- conversation identifiers
-- metadata
-- a key-value memory interface
+console.log(result.text);
 
-### Privacy
+The in-memory implementation is process-local.
 
-Do not persist sensitive data unless your application explicitly needs it and you have an appropriate data-handling policy. AXIOM exposes a persistence abstraction so you can choose encrypted, database-backed or ephemeral storage later rather than silently coupling the framework to a storage service.
+AXIOM intentionally does not silently send application memory to a remote service.
 
-## Tools
+Future memory adapters can target:
 
-Tools are explicit functions that an AI model can request. Registration is type-safe and execution is permission-aware.
+- SQLite
+- files
+- embedded databases
+- SQL databases
+- remote databases
+- encrypted storage
 
-```ts
+---
+
+Tools
+
+Tools allow models to request application-defined operations.
+
+import { ToolRegistry } from "@glydexstudio/axiom-tools";
+
 const tools = new ToolRegistry();
 
 tools.register({
@@ -262,35 +300,70 @@ tools.register({
     additionalProperties: false
   },
   permissions: ["read"],
-  execute: ({ a, b }: { a: number; b: number }) => a + b
+  execute: ({ a, b }: { a: number; b: number }) => {
+    return a + b;
+  }
 });
+
+Connect the registry:
 
 const axiom = new Axiom({
   model,
   tools,
   toolPermissions: new Set(["read"])
 });
-```
 
-AXIOM never gives a tool more permission than the application explicitly grants.
+AXIOM validates tool input and checks the permissions granted by the application before execution.
 
-The built-in permission categories are:
+---
 
-```text
+Tool Permissions
+
+AXIOM currently defines these permission categories:
+
 read
 write
 network
 filesystem
 process
-```
 
-Applications can keep permissions minimal. A tool that requires `filesystem` should not be exposed to a model running in a context where filesystem access is not wanted.
+Permissions are explicit.
 
-## Agents
+For example:
 
-`@glydexstudio/axiom-agents` provides a bounded execution loop around the same model/tool contracts used by the core runtime.
+toolPermissions: new Set([
+  "read",
+  "network"
+])
 
-```ts
+A model does not automatically receive filesystem, process, network or write access.
+
+Capabilities must be exposed by the application through tools.
+
+---
+
+Streaming
+
+Models can optionally expose streaming.
+
+if (!model.stream) {
+  throw new Error("Streaming is not supported.");
+}
+
+for await (const event of axiom.stream("Tell me a story.")) {
+  console.log(event);
+}
+
+AXIOM validates empty or whitespace-only input consistently across normal and streaming execution.
+
+---
+
+Agents
+
+"@glydexstudio/axiom-agents" provides bounded agent execution.
+
+import { AgentRunner } from "@glydexstudio/axiom-agents";
+
 const agent = new AgentRunner({
   model,
   tools,
@@ -298,93 +371,151 @@ const agent = new AgentRunner({
   maxSteps: 6
 });
 
-const result = await agent.run("Use the available tools to collect the requested information.");
+const result = await agent.run(
+  "Use the available tools to collect the requested information."
+);
+
 console.log(result.text);
-```
 
-The 0.1.0 agent implementation is intentionally bounded. It does not provide unrestricted background autonomy, arbitrary process execution or hidden persistence.
+Agent execution is intentionally bounded.
 
-## Plugins
+AXIOM does not provide unrestricted autonomous background execution.
 
-Plugins can extend AXIOM without editing the core package.
+---
 
-```ts
-const auditPlugin = {
-  name: "audit-log",
+Knowledge
+
+"@glydexstudio/axiom-knowledge" provides the foundation for retrieval systems.
+
+Current capabilities include:
+
+- local document storage
+- lexical search
+- embedding interfaces
+- vector-store interfaces
+- in-memory cosine similarity
+
+Example:
+
+import { LocalKnowledgeBase } from "@glydexstudio/axiom-knowledge";
+
+const knowledge = new LocalKnowledgeBase();
+
+knowledge.add({
+  id: "document-1",
+  content: "AXIOM is provider-agnostic.",
+  metadata: {
+    source: "documentation"
+  }
+});
+
+const results = knowledge.search(
+  "provider agnostic"
+);
+
+console.log(results);
+
+AXIOM does not currently claim to provide a complete production RAG pipeline.
+
+---
+
+Events
+
+The core runtime exposes events that applications and plugins can subscribe to.
+
+const unsubscribe = axiom.on(
+  "tool:start",
+  (event) => {
+    console.log("Tool started:", event.name);
+  }
+);
+
+Remove the listener when it is no longer required:
+
+unsubscribe();
+
+Events are useful for:
+
+- logging
+- UI updates
+- debugging
+- telemetry
+- application integrations
+- plugin systems
+
+---
+
+Plugins
+
+Plugins extend AXIOM without modifying the core package.
+
+const plugin = {
+  name: "audit-plugin",
   version: "1.0.0",
+
   install(context) {
-    context.on("tool:start", (event) => {
-      console.log(`tool started: ${event.name}`);
+    context.on("tool:start", event => {
+      console.log(`Tool started: ${event.name}`);
     });
   }
 };
 
-await axiom.use(auditPlugin);
-```
+await axiom.use(plugin);
 
-Plugin authors receive a limited context containing the tool registry, event subscription API and read-only configuration access.
+Plugins receive a controlled context rather than unrestricted access to the runtime.
 
-The plugin system is intentionally small so that application developers can define their own plugin ecosystems without AXIOM taking control of their runtime.
+---
 
-## Knowledge and RAG foundation
+Vision and Voice
 
-`@glydexstudio/axiom-knowledge` is implemented as a foundation rather than an exaggerated "full RAG" claim.
+The vision and voice packages currently expose provider-neutral contracts.
 
-Implemented:
+@glydexstudio/axiom-vision
+@glydexstudio/axiom-voice
 
-- local document storage
-- lexical retrieval
-- embedding-provider interface
-- vector-store interface
-- in-memory cosine similarity vector store
+These packages are intentionally interfaces/contracts at this stage.
 
-Planned:
+They do not pretend to provide local vision or speech inference when an actual provider implementation is not present.
 
-- chunking pipelines
-- embedding provider adapters
-- durable vector database integrations
-- reranking
-- citation-aware retrieval orchestration
+This allows application developers to build against stable capability abstractions before selecting a specific runtime.
 
-Example:
+---
 
-```ts
-import { LocalKnowledgeBase } from "@glydexstudio/axiom-knowledge";
+Architecture
 
-const knowledge = new LocalKnowledgeBase();
-knowledge.add({
-  id: "docs-01",
-  content: "AXIOM is local-first and provider-agnostic.",
-  metadata: { source: "readme" }
-});
+                         Your Application
+                                │
+                                ▼
+                    ┌─────────────────────┐
+                    │   AXIOM Core        │
+                    │                     │
+                    │ Runtime             │
+                    │ Models              │
+                    │ Memory integration  │
+                    │ Tools               │
+                    │ Events              │
+                    │ Plugins             │
+                    └──────────┬──────────┘
+                               │
+          ┌────────────────────┼────────────────────┐
+          ▼                    ▼                    ▼
+      Providers             Agents             Knowledge
+          │                    │                    │
+     Ollama              bounded loop          retrieval
+     OpenAI-compatible   tool calls            vectors
+     fallback router     permissions           embeddings
+          │
+          ▼
+    Local / Remote
+      AI runtime
 
-const matches = knowledge.search("provider agnostic");
-```
+The core package does not contain vendor-specific model transport.
 
-## Vision and voice
+---
 
-The vision and voice packages currently expose provider-neutral contracts so application code can be written against stable interfaces before a specific provider or local runtime is selected.
+Monorepo
 
-They intentionally do not contain fake inference or synthesized data.
-
-## Configuration
-
-AXIOM configuration is code-first. Environment variables are optional and are normally consumed by an application's provider setup, not by the core runtime.
-
-Example `.env` values:
-
-```dotenv
-AXIOM_MODEL=your-local-model
-AXIOM_BASE_URL=http://127.0.0.1:11434
-AXIOM_API_KEY=
-```
-
-Never commit actual secrets. `.env.example` is intentionally tracked while `.env` and `.env.*` are ignored.
-
-## Monorepo structure
-
-```text
-AXIOM/
+axiom/
 ├── packages/
 │   ├── core/
 │   ├── memory/
@@ -394,18 +525,14 @@ AXIOM/
 │   ├── knowledge/
 │   ├── vision/
 │   └── voice/
+│
 ├── examples/
-│   ├── basic/
-│   ├── tools/
-│   ├── memory/
-│   └── agents/
 ├── docs/
 ├── tests/
 ├── scripts/
 ├── .github/
 │   └── workflows/
-├── .env.example
-├── .gitignore
+│
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
 ├── LICENSE
@@ -414,172 +541,196 @@ AXIOM/
 ├── package.json
 ├── tsconfig.base.json
 └── tsconfig.json
-```
 
-## Development setup
+---
 
-```bash
+Development
+
+Clone the repository:
+
+git clone https://github.com/GlydexStudio/axiom.git
+cd axiom
+
+Install dependencies:
+
 npm install
-npm run build
-npm test
-```
 
-Or run the complete check:
+Run the complete verification:
 
-```bash
 npm run check
-```
 
-No GUI is required for the basic build and test workflow.
+Build only:
 
-### Building on Termux / Android environments
+npm run build
 
-The repository uses standard Node.js, TypeScript and npm workspace tooling. The core build is command-line only. Actual model inference remains a separate concern and can be provided by an HTTP model server reachable from the environment.
+Run tests only:
 
-## Testing
+npm test
 
-The repository contains real tests for:
+More information:
 
-- core initialization and model abstraction
-- tool registration and execution
-- tool validation and permission errors
-- memory operations
-- provider request/response mapping
-- knowledge retrieval and vector similarity
-- configuration and error handling
+- "Developer Guide" (docs/GETTING_STARTED.md)
+- "Development Guide" (docs/DEVELOPMENT.md)
+- "Architecture" (docs/ARCHITECTURE.md)
+- "Plugin Authoring" (docs/PLUGIN_AUTHORING.md)
+- "Publishing" (docs/PUBLISHING.md)
+- "Contributing" (CONTRIBUTING.md)
+- "Security" (SECURITY.md)
+
+---
+
+Testing
+
+AXIOM maintains automated coverage for the implemented runtime.
+
+The verification suite covers:
+
+- core runtime initialization
+- model abstraction
+- tool registration
+- tool validation
+- permissions
+- memory
+- provider behavior
+- provider errors
+- knowledge retrieval
+- vector similarity
+- streaming
+- agent limits
+- configuration
+- edge cases
 
 Run:
 
-```bash
-npm test
-```
+npm run check
 
-## Examples
+The "0.1.2" release was validated with:
 
-The repository includes working TypeScript examples for the implemented APIs. After `npm install` and `npm run build`, run them with a compatible local model server:
+12/12 official tests passing
+Behavior tests passing
+Integration tests passing
+Edge + streaming tests passing
+TypeScript build passing
 
-```bash
-node --experimental-strip-types examples/basic/index.ts
-node --experimental-strip-types examples/tools/index.ts
-node --experimental-strip-types examples/memory/index.ts
-node --experimental-strip-types examples/agents/index.ts
-```
+---
 
-The examples use the local Ollama adapter by default and read `AXIOM_MODEL` when supplied.
-
-## GitHub Packages
-
-### Using AXIOM from GitHub Packages
-
-GitHub Packages' npm registry uses scoped package names and supports authentication with a personal access token (classic). The exact token permissions depend on whether you are reading or publishing packages and on the visibility/access controls of the package.
-
-For a user installing packages, the normal setup is:
-
-1. Create a GitHub Personal Access Token (classic) with `read:packages` when authentication is required for the package.
-2. Keep the token outside the repository.
-3. Configure the `@glydexstudio` scope to use `https://npm.pkg.github.com`.
-4. Give npm the token through an environment variable or user-level `.npmrc`.
-
-Example user-level `.npmrc`:
-
-```ini
-@glydexstudio:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=${GITHUB_PACKAGES_TOKEN}
-```
-
-Then install:
-
-```bash
-npm install @glydexstudio/axiom-core
-npm install @glydexstudio/axiom-memory @glydexstudio/axiom-tools
-npm install @glydexstudio/axiom-providers
-```
-
-For a private package, your GitHub account must have access to the package and the token must have the permissions needed to read it. Public package visibility is managed on GitHub; package visibility does not mean that an application should publish credentials in its source.
-
-Never commit `.npmrc` files containing literal tokens. Prefer environment-variable expansion as shown above.
-
-## Publishing to GitHub Packages
-
-Maintainers use the included workflow at `.github/workflows/publish.yml`.
-
-The workflow:
-
-1. Runs on GitHub Release publication or manual dispatch.
-2. Installs dependencies.
-3. Builds and tests the monorepo.
-4. Uses the GitHub Actions `GITHUB_TOKEN` with `packages: write`.
-5. Publishes each workspace package to `https://npm.pkg.github.com`.
-6. Does not hardcode a PAT or secret.
-
-The complete maintainer procedure is documented in [docs/PUBLISHING.md](docs/PUBLISHING.md).
-
-## Versioning
+Versioning
 
 AXIOM follows semantic versioning:
 
-```text
 MAJOR.MINOR.PATCH
-```
 
-- MAJOR — breaking public API or package contract changes
-- MINOR — backwards-compatible functionality
-- PATCH — backwards-compatible bug fixes and maintenance
+PATCH
 
-The repository starts at `0.1.0`, which means the public API is still allowed to evolve before 1.0.0. Breaking changes during the 0.x phase will still be called out clearly in the changelog and release notes.
+Bug fixes and maintenance changes.
 
-## Roadmap
+0.1.1 → 0.1.2
 
-### 0.1.x
+MINOR
 
-- Stabilize provider contracts
-- Improve test coverage
-- Add durable memory adapter interfaces
-- Add more model capability metadata
-- Expand plugin hooks
+Backwards-compatible functionality.
 
-### 0.2.x
+0.1.x → 0.2.0
 
-- Embedding adapters
-- Persistent vector stores
-- Retrieval pipelines and citations
-- More local runtime adapters
+MAJOR
 
-### 0.3.x
+Breaking public API or package contract changes.
 
-- Richer agent planning abstractions
-- Routing policies
-- Observability hooks
-- Vision / voice provider implementations
+0.x → 1.0.0
 
-### 1.0.0
+During the "0.x" phase, APIs may still evolve before the framework reaches its stable "1.0.0" milestone.
 
-- Stable core API and compatibility policy
-- Documented extension contracts
-- Production-grade adapters for selected persistence and model runtimes
+---
 
-The roadmap is directional, not a claim that those features exist today.
+Roadmap
 
-## Security
+0.1.x
 
-Read [SECURITY.md](SECURITY.md) for reporting and operational guidance.
+- stabilize core contracts
+- expand test coverage
+- improve provider support
+- improve memory abstractions
+- expand plugin hooks
+- improve developer documentation
 
-Key rules:
+0.2.x
 
-- never commit provider keys or tokens
-- grant tools only the permissions they need
-- treat plugins as executable code
-- review local persistence and retention policies
-- keep dependencies patched
+- embedding adapters
+- persistent vector stores
+- retrieval pipelines
+- citations
+- more local runtime integrations
 
-## Contributing
+0.3.x
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+- richer agent planning
+- routing policies
+- observability
+- vision implementations
+- voice implementations
 
-Contributions are welcome for code, tests, documentation, provider adapters, plugins and examples, provided that the contribution is explicit about what is implemented and what remains experimental.
+1.0.0
 
-## License
+- stable public API
+- compatibility policy
+- documented extension contracts
+- production-grade selected adapters
 
-AXIOM is released under the MIT License. See [LICENSE](LICENSE).
+The roadmap is directional and does not represent features that are already implemented.
 
-Copyright (c) 2026 Glydex Studio
+---
+
+Security
+
+AI tools can expose powerful application capabilities.
+
+Applications should:
+
+- grant the minimum required permissions
+- validate tool inputs
+- avoid exposing unnecessary filesystem/process capabilities
+- protect provider credentials
+- review plugins before installation
+- define appropriate memory retention policies
+- keep dependencies updated
+
+For security reports, see "SECURITY.md" (SECURITY.md).
+
+---
+
+Contributing
+
+Contributions are welcome.
+
+You can contribute:
+
+- code
+- tests
+- documentation
+- provider adapters
+- memory adapters
+- knowledge integrations
+- plugins
+- examples
+- bug reports
+- feature proposals
+
+Read "CONTRIBUTING.md" (CONTRIBUTING.md) before submitting a contribution.
+
+---
+
+License
+
+AXIOM is released under the MIT License.
+
+See "LICENSE" (LICENSE).
+
+Copyright © 2026 Glydex Studio
+
+---
+
+<div align="center">AXIOM
+
+The intelligence layer for any application.
+
+</div>
