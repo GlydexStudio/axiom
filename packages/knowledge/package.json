@@ -1,6 +1,6 @@
 {
   "name": "@glydexstudio/axiom-knowledge",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Local-first knowledge and retrieval abstractions for AXIOM.",
   "license": "MIT",
   "type": "module",
