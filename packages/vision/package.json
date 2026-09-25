@@ -1,6 +1,6 @@
 {
   "name": "@glydexstudio/axiom-vision",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Provider-neutral vision capability contracts for AXIOM.",
   "license": "MIT",
   "type": "module",
