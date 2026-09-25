@@ -34,10 +34,13 @@ jobs:
 
       # ---------------------------------------------------------
       # Publish to npm Registry
-      # Uses npm Trusted Publishing / OIDC
+      # Bootstrap authentication using NPM_TOKEN.
+      # This will later be replaced by npm Trusted Publishing.
       # ---------------------------------------------------------
 
       - name: Publish packages to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           npm publish --workspace packages/memory --registry=https://registry.npmjs.org --access public
           npm publish --workspace packages/tools --registry=https://registry.npmjs.org --access public
